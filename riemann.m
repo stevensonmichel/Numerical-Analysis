@@ -16,7 +16,6 @@ function result = riemann()
     L2 = 0.5 * L1 + (f(x + deltaX)) * deltaX;
     x = [x, x + deltaX];
 
-
     while abs(L2 - L1) > e
         n = 2*n;
         deltaX = deltaX / 2;
@@ -25,7 +24,8 @@ function result = riemann()
         x = [x, x + deltaX];
     end
 
-    fprintf('The result of t2 for Riemann is: %.15f\n', L2);
+    % fprintf('The result of t2 for Riemann is: %.15f\n', L2);
+    fprintf('The number of subinterval for Riemann is: %.15f\n', n);
 
     result = L2;
 end

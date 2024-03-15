@@ -16,16 +16,16 @@ function result = trapezoidal()
     t2 = 0.5 * t1 + (f(x + deltaX)) * deltaX;
     x = [x, x + deltaX];
 
-
     while abs(t2 - t1) > e
         n = 2*n;
         deltaX = deltaX / 2;
         t1 = t2;
-        t2 =     t2 = 0.5 * t1 + sum(f(x + deltaX)) * deltaX;
+        t2 = 0.5 * t1 + sum(f(x + deltaX)) * deltaX;
         x = [x, x + deltaX];
     end
 
-    fprintf('The result of t2 for Trapezoidal is: %.15f\n', t2);
+    % fprintf('The result of t2 for Trapezoidal is: %.15f\n', t2);
+    fprintf('The number of subinterval is: %.15f\n', n);
 
     result = t2;
 end
