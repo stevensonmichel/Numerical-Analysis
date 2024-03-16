@@ -1,4 +1,4 @@
-function final = bissection()
+function final = bisection()
     format long;
     r = input("Choose your r: ");
     e = input("Choose your epsilon:" );
