@@ -1,21 +1,21 @@
 function final = newraph2()
     format long;
 
-    r = input("Write your r: ")
+    r = input("Choose your r: ")
     e = input("Choose your epsilon: ")
 
-    a = r/2;
-    b = (r + a^2)/(2 * a);
+    a = log(r);
+    b = a - 1 + r / (exp(a));
     counter = 0;
 
     while abs(b - a) > e
         a = b;
-        b = (r + a^2) / (2 * a);
+        b = a - 1 + r / (exp(a));
         counter = counter + 1;
     endwhile
     
     fprintf("The final value of the counter is %d\n", counter);
-    fprintf("The final value of newraph is %d\n", b);
-    disp(b);
+    % fprintf("The final value of newraph is %d\n", b);
+    % disp(b);
     final = b;
 end
