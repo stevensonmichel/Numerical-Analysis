@@ -26,10 +26,10 @@ function result = richardsonRie()
 
     while abs(R2 - R1) > e
         n = 2*n;
+        deltaX = deltaX / 2;
         R1 = R2;
         L1 = L2;
         L2 = 0.5 * L1 + sum(f(x + deltaX)) * deltaX;
-        deltaX = deltaX / 2;
         x = [x, x + deltaX];
         R2 = 2*L2 - L1
     end

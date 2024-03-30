@@ -22,7 +22,7 @@ function result = richardsonMid()
     M1 = M2;
     x = [x - deltaX/2, x + deltaX/2];
     M2 = (sum(f(x))) * deltaX
-    R2 = 2 * M2 - M1;
+    R2 = (4 * M2 - M1) / 3;
 
     while abs(M2 - M1) > e
         M1 = M2
