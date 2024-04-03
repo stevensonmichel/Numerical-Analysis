@@ -15,7 +15,7 @@ function result = richardsonMid()
     deltaX = deltaX / 2;
     x = [x - deltaX/2, x + deltaX/2];
     M2 = (sum(f(x))) * deltaX
-    R1 = 2 * M2 - M1;
+    R1 = (4 * M2 - M1) / 3;
 
     n = 4;
     deltaX = deltaX / 2;
@@ -24,14 +24,14 @@ function result = richardsonMid()
     M2 = (sum(f(x))) * deltaX
     R2 = (4 * M2 - M1) / 3;
 
-    while abs(M2 - M1) > e
-        M1 = M2
+    while abs(R2 - R1) > e
+        R1 = R2;
+        M1 = M2;
         n = 2*n;
         deltaX = deltaX / 2;
-        R1 = R2;
         x = [x - deltaX/2, x + deltaX/2];
         M2 = (sum(f(x))) * deltaX;
-        R2 = 2 * M2 - M1;
+        R2 = (4 * M2 - M1) / 3;
 
     end
 

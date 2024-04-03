@@ -13,11 +13,11 @@ function result = richardsonTrap()
 
     n = 2;
     deltaX = deltaX / 2;
-    t2 = 0.5 * t1 + (f(x + deltaX)) * deltaX;
+    t2 = 0.5 * t1 + sum(f(x + deltaX)) * deltaX;
     x = [x, x + deltaX];
-    R1 = 2 * t2 - t1;
+    R1 = (4 * t2 - t1) / 3;
 
-    n = 2;
+    n = 4;
     deltaX = deltaX / 2;
     t1 = t2;
     t2 = 0.5 * t1 + sum(f(x + deltaX)) * deltaX;
