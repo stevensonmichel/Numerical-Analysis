@@ -3,7 +3,7 @@ function result = richardsonSimp3()
     
     a = input("Enter your a value: ");
     b = input("Enter your b value: ");
-    f = @(x) sinc(x);
+    f = @(x) log(x);
     e = input("Enter your epsilon value: ");
 
     n = 1;
