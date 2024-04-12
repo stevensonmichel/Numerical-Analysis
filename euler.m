@@ -1,4 +1,4 @@
-function result = integral()
+function result = euler()
     format long;
     
     a = input("Enter your a value: ");
