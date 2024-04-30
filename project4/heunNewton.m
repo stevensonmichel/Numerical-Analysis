@@ -1,52 +1,55 @@
 function result = heunNewton()
     format long;
     
-    a = input("Enter the start time t0: ");
-    b = input("Enter the end time tf: ");
+    a = input("Enter the start time a: ");
+    b = input("Enter the end time b: ");
     Ta = input("Enter the ambient temperature Ta: ");
-    k = input("Enter the cooling constant k: ");
-    T0 = input("Enter the initial temperature of the object T0: ");
-    e = input("Enter your epsilon value: ");
+    k = input("Enter the constant k: ");
+    ya = input("Enter the initial temperature of the object: ");
+    e = input("Enter your epsilon: ");
     
+    f = @(x, y) -k * (y - Ta);
+
     n = 1;
-    dt = b - a;
-    k1 = -k * (T0 - Ta);
-    k2 = -k * ((T0 + k1 * dt) - Ta);
-    avgK = (k1 + k2) / 2;
-    T_next = T0 + avgK * dt;
-
+    deltaX = b - a;
+    k1 = f(a, ya);
+    k2 = f(a + deltaX, ya + k1 * deltaX);
+    k = (k1 + k2) / 2;
+    yb1 = ya + k * deltaX;
+ 
     n = 2;
-    dt = (b - a) / 2;
-    T = T0;
-    t = a;
+    deltaX = (b - a) / 2;
+    x = a;
+    k1 = f(a, ya);
+    k2 = f(x + deltaX, ya + k1 * deltaX);
+    k = (k1 + k2) / 2;
+    y = ya + k * deltaX;
+    x = a + deltaX;
+    k1 = f(x, y);
+    k2 = f(x + deltaX, y + k1 * deltaX);
+    k = (k1 + k2) / 2;
+    yb2 = y + k * deltaX;
 
-    k1 = -k * (T - Ta);
-    T1 = T + k1 * dt;
-    k2 = -k * (T1 - Ta);
-    avgK = (k1 + k2) / 2;
-    T2 = T + avgK * dt;
+    while abs(yb2 - yb1) > e
+        n = 2*n;
+        deltaX = deltaX / 2;
+        x = a;
+        y = ya;
+        yb1 = yb2;
 
-    while abs(T2 - T_next) > e
-        n = 2 * n;
-        dt = dt / 2;
-        t = a;
-        T = T0;
-        T_next = T2;
-
-        for j = 1 : n
-            k1 = -k * (T - Ta);
-            T1 = T + k1 * dt;
-            k2 = -k * (T1 - Ta);
-            avgK = (k1 + k2) / 2;
-            T = T + avgK * dt;
-            t = t + dt;
+        for j = 1:n
+            k1 = f(x, y);
+            k2 = f(x + deltaX, y + k1 * deltaX);
+            k = (k1 + k2) / 2;
+            y = y + k * deltaX;
+            x = x + deltaX;
         end
-
-        T2 = T;
+        
+        yb2 = y;
     end
 
-    fprintf('The final temperature is: %.15f\n', T2);
-    fprintf('The number of subintervals is: %d\n', n);
+    fprintf('The result of the temperature for Heun Method is: %.15f\n', yb2);
+    fprintf('The number of subintervals is: %.15f\n', n);
 
-    result = T2;
+    result = yb2;
 end

@@ -4,40 +4,39 @@ function result = eulerNewton()
     a = input("Enter the start time a: ");
     b = input("Enter the end time b: ");
     Ta = input("Enter the ambient temperature Ta: ");
-    k = input("Enter the cooling constant k: ");
-    T0 = input("Enter the initial temperature of the object T0: ");
-    e = input("Enter your epsilon value: ");
+    k = input("Enter the constant k: ");
+    ya = input("Enter the initial temperature of the object: ");
+    e = input("Enter your epsilon: ");
     
-    n = 1;
-    dt = b - a;
-    T_next = T0 + (-k * (T0 - Ta)) * dt; 
-    
-    n = 2;
-    dt = (b - a) / 2;
-    T = T0;
-    t = a;
-    T1 = T0 + (-k * (T0 - Ta)) * dt;
-    t = t + dt;
-    T2 = T1 + (-k * (T1 - Ta)) * dt;
+    f = @(x, y) -k * (y - Ta);
 
-    while abs(T2 - T_next) > e
+    n = 1;
+    dx = b - a;
+    yb1 = ya + f(a, ya) * dx;
+
+    n = 2;
+    dx = (b - a) / 2;
+    y = ya + f(a, ya) * dx;
+    x = a + dx;
+    yb2 = y + f(x, y) * dx;
+
+    while abs(yb2 - yb1) > e
         n = 2 * n;
-        dt = dt / 2;
-        t = a;
-        T = T0;
-        T_next = T2;
+        dx = dx / 2;
+        x = a;
+        y = ya;
+        yb1 = yb2;
 
         for j = 1 : n
-            T = T + (-k * (T - Ta)) * dt;
-            t = t + dt;
+            y = y + f(x, y) * dx;
+            x = x + dx;
         end
-
-        T2 = T;
-
+        
+        yb2 = y;
     end
 
-    fprintf('The final temperature is: %.15f\n', T2);
-    fprintf('The number of subintervals is: %d\n', n);
+    fprintf('The result of the temperature for Euler Method is: %.15f\n', yb2);
+    fprintf('The number of subintervals is: %.15f\n', n);
 
-    result = T2;
+    result = yb2;
 end
