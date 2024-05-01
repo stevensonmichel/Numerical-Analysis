@@ -1,12 +1,12 @@
-function result = rk4Newton()
+function result = rk4Newton(a, b, ya, Ta, k, e)
     format long;
     
-    a = input("Enter the start time a: ");
-    b = input("Enter the end time b: ");
-    Ta = input("Enter the ambient temperature Ta: ");
-    k = input("Enter the constant k: ");
-    ya = input("Enter the initial temperature of the object: ");
-    e = input("Enter your epsilon: ");
+    % a = input("Enter the start time a: ");
+    % b = input("Enter the end time b: ");
+    % ya = input("Enter the initial temperature of the object: ");
+    % Ta = input("Enter the ambient temperature Ta: ");
+    % k = input("Enter the constant k: ");
+    % e = input("Enter your epsilon: ");
     
     f = @(x, y) -k * (y - Ta);
 

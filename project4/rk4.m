@@ -4,7 +4,7 @@ function result = rk4()
     a = input("Enter your a value: ");
     b = input("Enter your b value: ");
     f = @(x, y) x^2 - y^2;
-    ya = input("Enter the initial value: ")
+    ya = input("Enter the initial value: ");
     e = input("Enter your epsilon value: ");
 
     n = 1;
